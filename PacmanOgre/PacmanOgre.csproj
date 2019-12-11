@@ -69,14 +69,29 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Source\Components\AnimationComponent.cs" />
+    <Compile Include="Source\Components\MeshComponent.cs" />
+    <Compile Include="Source\Components\MovementComponent.cs" />
+    <Compile Include="Source\Components\RenderableComponent.cs" />
+    <Compile Include="Source\Components\TransformComponent.cs" />
+    <Compile Include="Source\IContext.cs" />
+    <Compile Include="Source\Input\InputManager.cs" />
+    <Compile Include="Source\IRenderer.cs" />
+    <Compile Include="Source\Render\Renderer.cs" />
+    <Compile Include="Source\PacmanGame.cs" />
     <Compile Include="Source\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source\ITickManager.cs" />
+    <Compile Include="Source\Scene\IScene.cs" />
+    <Compile Include="Source\Scene\ISceneManager.cs" />
+    <Compile Include="Source\Scene\MainScene.cs" />
+    <Compile Include="Source\Scene\SceneManager.cs" />
+    <Compile Include="Source\TickManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Headers\" />
     <Folder Include="Resources\Media\fonts\" />
     <Folder Include="Resources\Media\materials\programs\" />
     <Folder Include="Resources\Media\materials\scripts\" />
@@ -112,10 +127,16 @@
     <Content Include="Dependencies\Ogre3DCSharp.dll" />
     <Content Include="Resources\Media\resource_holder.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Entity\Entity.csproj">
+      <Project>{fe5839d7-bf87-4cdc-88d9-b9a857f03b89}</Project>
+      <Name>Entity</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy "$(OGRE_HOME)\bin\*.dll" "$(ProjectDir)$(OutDir)"
-copy "$(OGRE_HOME)\lib\libOgre.dll" "$(ProjectDir)$(OutDir)"
+    <PostBuildEvent>copy "$(ProjectDir)Dependencies\Ogre\bin\*.dll" "$(ProjectDir)$(OutDir)"
+copy "$(ProjectDir)Dependencies\Ogre\lib\libOgre.dll" "$(ProjectDir)$(OutDir)"
 copy "$(ProjectDir)Resources\resources.cfg" "$(ProjectDir)$(OutDir)"
 copy "$(ProjectDir)Resources\plugins.cfg" "$(ProjectDir)$(OutDir)"
 xcopy "$(ProjectDir)Resources\Media" "$(ProjectDir)$(OutDir)Media\" /S /E /Y
