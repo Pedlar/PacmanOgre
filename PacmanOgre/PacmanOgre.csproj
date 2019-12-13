@@ -137,6 +137,7 @@
   <PropertyGroup>
     <PostBuildEvent>copy "$(ProjectDir)Dependencies\Ogre\bin\*.dll" "$(ProjectDir)$(OutDir)"
 copy "$(ProjectDir)Dependencies\Ogre\lib\libOgre.dll" "$(ProjectDir)$(OutDir)"
+xcopy "$(ProjectDir)Dependencies\Ogre\Media" "$(ProjectDir)$(OutDir)sdk\Media\" /S /E /Y
 copy "$(ProjectDir)Resources\resources.cfg" "$(ProjectDir)$(OutDir)"
 copy "$(ProjectDir)Resources\plugins.cfg" "$(ProjectDir)$(OutDir)"
 xcopy "$(ProjectDir)Resources\Media" "$(ProjectDir)$(OutDir)Media\" /S /E /Y
