@@ -70,13 +70,17 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Source\Components\AnimationComponent.cs" />
+    <Compile Include="Source\Components\CameraComponent.cs" />
     <Compile Include="Source\Components\MeshComponent.cs" />
-    <Compile Include="Source\Components\MovementComponent.cs" />
+    <Compile Include="Source\Components\PlayerInputComponent.cs" />
     <Compile Include="Source\Components\RenderableComponent.cs" />
-    <Compile Include="Source\Components\TransformComponent.cs" />
+    <Compile Include="Source\Components\PositionComponent.cs" />
+    <Compile Include="Source\Components\VelocityComponent.cs" />
     <Compile Include="Source\IContext.cs" />
+    <Compile Include="Source\IMovementManager.cs" />
     <Compile Include="Source\Input\InputManager.cs" />
     <Compile Include="Source\IRenderer.cs" />
+    <Compile Include="Source\MovementManager.cs" />
     <Compile Include="Source\Render\Renderer.cs" />
     <Compile Include="Source\PacmanGame.cs" />
     <Compile Include="Source\Program.cs" />
@@ -87,6 +91,8 @@
     <Compile Include="Source\Scene\MainScene.cs" />
     <Compile Include="Source\Scene\SceneManager.cs" />
     <Compile Include="Source\TickManager.cs" />
+    <Compile Include="Source\Utilities\ObjectExtensions.cs" />
+    <Compile Include="Source\Utilities\VectorUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

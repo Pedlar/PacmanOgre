@@ -55,7 +55,9 @@ namespace PacmanOgre
         }
 
         public IRenderer GetRenderer() => _renderer;
+        public RenderWindow GetRenderWindow() => getRenderWindow();
         public ITickManager GetITickManager() => _tickManager;
+        public InputManager GetInputManager() => _inputManager;
 
         public override void setup()
         {
@@ -66,32 +68,32 @@ namespace PacmanOgre
             _renderer.Setup();
 
             _tickManager.Setup();
-        }
 
+            _sceneManager.AddScene<MainScene>();
+
+            _sceneManager.DisplayScene(MainScene.MainSceneId);
+        }
+        
         public override bool frameStarted(FrameEvent evt)
         {
             _tickManager.sendFrameStart(new TickEventArgs { TimeDelta = evt.timeSinceLastFrame } );
-
             _renderer.Update();
-            return true;
+            return base.frameStarted(evt);
         }
 
         public override bool frameRenderingQueued(FrameEvent evt)
         {
             _tickManager.sendFrameQueued(new TickEventArgs { TimeDelta = evt.timeSinceLastFrame });
-
-            _renderer.Update();
-            return true;
+            _sceneManager.Update(evt.timeSinceLastFrame);
+            return base.frameRenderingQueued(evt);
         }
 
         public override bool frameEnded(FrameEvent evt)
         {
             _tickManager.sendFrameEnd(new TickEventArgs { TimeDelta = evt.timeSinceLastFrame });
-
-            _renderer.Update();
-            return true;
+            return base.frameEnded(evt);
         }
-
+        
         #region IDisposable Support
         private bool disposedValue = false;
 

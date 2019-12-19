@@ -15,6 +15,8 @@ namespace PacmanOgre.Scene
         event EventHandler<EventArgs> OnSceneLoaded;
         event EventHandler<EventArgs> OnSceneUnloaded;
 
-        void LoadScene(SceneId sceneId);
+        void AddScene<T>() where T : IScene;
+        void DisplayScene(SceneId sceneId);
+        void Update(float timeDelta);
     }
 }

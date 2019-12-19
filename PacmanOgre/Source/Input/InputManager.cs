@@ -4,9 +4,15 @@ using org.ogre;
 
 namespace PacmanOgre.Input
 {
-
-    internal class InputManager : InputListener, IDisposable
+    public class KeyboardEventArgs : EventArgs
     {
+        public KeyboardEvent KeyboardEvent { get; set; }
+    }
+
+    public class InputManager : InputListener, IDisposable
+    {
+        public event EventHandler<KeyboardEventArgs> OnKeyPressed;
+        public event EventHandler<KeyboardEventArgs> OnKeyReleased;
 
         public InputManager(IContext ctx)
         {
@@ -15,11 +21,13 @@ namespace PacmanOgre.Input
 
         public override bool keyPressed(KeyboardEvent evt)
         {
+            OnKeyPressed?.Invoke(this, new KeyboardEventArgs() { KeyboardEvent = evt });
             return false; // propgate further;
         }
 
         public override bool keyReleased(KeyboardEvent evt)
         {
+            OnKeyReleased?.Invoke(this, new KeyboardEventArgs() { KeyboardEvent = evt });
             return false; // propgate further;
         }
 

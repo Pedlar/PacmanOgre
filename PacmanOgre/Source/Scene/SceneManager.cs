@@ -1,6 +1,8 @@
-﻿using System;
+﻿using SharpEngine;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,21 +12,75 @@ namespace PacmanOgre.Scene
     {
         public IDictionary<SceneId, IScene> Scenes { get; private set; } = new Dictionary<SceneId, IScene>();
 
-        public SceneId CurrentScene { get; private set; }
+        public SceneId CurrentScene { get; private set; } = new SceneId() { SceneName = "InvalidScene" };
 
         public event EventHandler<EventArgs> OnSceneLoaded;
         public event EventHandler<EventArgs> OnSceneUnloaded;
 
+        private IContext _context;
+
         public SceneManager(IContext context)
         {
-
+            _context = context;
         }
 
-        public void LoadScene(SceneId sceneId)
+        public void AddScene<T>() where T: IScene
+        {
+            Type sceneType = typeof(T);
+            ConstructorInfo constructorInfo = sceneType.GetConstructor(new Type[] { typeof(IContext) });
+            IScene scene;
+            object[] constructorParams = new object[] { };
+
+            if(constructorInfo != null)
+            {
+                constructorParams = new object[] { _context };
+            }
+            else if((constructorInfo = sceneType.GetConstructor(new Type[] { typeof(IContext), typeof(EntityManager) })) != null)
+            {
+                EntityManager entityManager = new EntityManager();
+                constructorParams = new object[] { _context, entityManager };
+            }
+            else if ((constructorInfo = sceneType.GetConstructor(new Type[] { typeof(IContext), typeof(EntityManager), typeof(IMovementManager) })) != null)
+            {
+                EntityManager entityManager = new EntityManager();
+                IMovementManager movementManager = new MovementManager(entityManager);
+                constructorParams = new object[] { _context, entityManager,  movementManager };
+            }
+            else
+            {
+                constructorInfo = sceneType.GetConstructors()[0];
+            }
+
+            scene = constructorInfo.Invoke(constructorParams) as IScene;
+            scene.Setup();
+
+            Scenes.Add(scene.SceneId, scene);
+        }
+
+        public void DisplayScene(SceneId sceneId)
         {
             if(CurrentScene == sceneId)
             {
                 return;
+            }
+            try
+            {
+                Scenes[CurrentScene].UnloadScene();
+            }
+            catch(KeyNotFoundException knfe)
+            {
+                // Don't do anything, Don't care.
+            }
+
+            CurrentScene = sceneId;
+            Scenes[CurrentScene].LoadScene();
+        }
+
+        public void Update(float timeDelta)
+        {
+            foreach (var scene in Scenes.Values)
+            {
+                scene.Update(timeDelta, scene.SceneId == CurrentScene);
             }
         }
 

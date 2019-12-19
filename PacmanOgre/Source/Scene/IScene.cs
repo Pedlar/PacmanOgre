@@ -12,7 +12,7 @@ namespace PacmanOgre.Scene
 
         public static explicit operator string(SceneId sceneId) => sceneId.SceneName;
         
-        public static bool operator ==(SceneId left, SceneId right) => left.SceneName == right.SceneName;
+        public static bool operator ==(SceneId left, SceneId right) => left?.SceneName == right?.SceneName;
         public static bool operator !=(SceneId left, SceneId right) => !(left == right);
 
         public override bool Equals(object obj)
@@ -33,5 +33,8 @@ namespace PacmanOgre.Scene
         SceneId SceneId { get; set; }
 
         void Setup();
+        void LoadScene();
+        void UnloadScene();
+        void Update(float timeDelta, bool sceneActive);
     }
 }

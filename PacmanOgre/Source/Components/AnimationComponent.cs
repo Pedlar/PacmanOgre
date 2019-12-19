@@ -26,9 +26,9 @@ namespace PacmanOgre.Components
             context.GetITickManager().OnFrameStart += OnFrameStart;
         }
 
-        public void OnEntityCreated()
+        public void Setup()
         {
-            if (!entity.HasComponent<MeshComponent>())
+            /*if (!entity.HasComponent<MeshComponent>())
             {
                 throw new Exception("Requires MeshComponenet");
             }
@@ -38,6 +38,12 @@ namespace PacmanOgre.Components
             ogreAnimationState = ogreEntity.getAnimationState(AnimationState);
             ogreAnimationState.setEnabled(true);
             ogreAnimationState.setLoop(true);
+            */
+        }
+
+        public void OnLoaded()
+        {
+
         }
 
         private void OnFrameStart(object sender, TickEventArgs e)

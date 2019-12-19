@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using org.ogre;
+using OgreEntity = org.ogre.Entity;
 using SharpEngine;
 
 namespace PacmanOgre.Components
@@ -13,24 +14,52 @@ namespace PacmanOgre.Components
         private readonly IContext _context;
         private readonly IEntity _entity;
 
-        public SceneNode SceneNode { get; private set; }
+        public SceneNode SceneNode { get; set; }
+        public OgreEntity OgreEntity { get; set; }
 
-        public RenderableComponent(IContext context, IEntity entity, SceneNode sceneNode)
+        public RenderableComponent(IContext context, IEntity entity)
         {
             _context = context;
             _entity = entity;
-            SceneNode = sceneNode;
+
+            _entity.AddActivationListener(OnActivated);
+            _entity.AddDestroyListener(OnDestroy);
         }
 
-        public void OnEntityCreated()
+        public void Setup()
         {
-            if (_entity.HasComponent<TransformComponent>())
+            if (!_entity.HasComponent<PositionComponent>())
             {
-                var transformComponent = _entity.GetComponent<TransformComponent>();
-                SceneNode.setPosition(transformComponent.Transform);
+                throw new Exception("Requires PositionComponent");
             }
+            PositionComponent positionComponent = _entity.GetComponent<PositionComponent>();
+            positionComponent.OnPositionChanged += OnPositionChanged;
+        }
 
+        public void OnLoaded()
+        {
 
         }
+
+        #region events
+        public void OnPositionChanged(object source, PositionChangedEventArgs eventArgs)
+        {
+            if (_entity.IsValid())
+            {
+                SceneNode.setPosition(eventArgs.Position);
+            }
+        }
+
+        public void OnActivated(object source, EntityEventArgs eventArgs)
+        {
+            SceneNode.attachObject(OgreEntity);
+        }
+
+        public void OnDestroy(object source, EntityEventArgs eventArgs)
+        {
+            SceneNode.detachObject(OgreEntity);
+            OgreEntity.Dispose();
+        }
+        #endregion
     }
 }
