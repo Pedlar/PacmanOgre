@@ -9,13 +9,12 @@ namespace PacmanOgre.Components
         private readonly IContext context;
         private readonly IEntity entity;
 
-        public string MeshName { get; private set; }
+        public string MeshName { get; set; }
 
-        public MeshComponent(IContext context, IEntity entity, string meshName)
+        public MeshComponent(IContext context, IEntity entity)
         {
             this.context = context;
             this.entity = entity;
-            MeshName = meshName;
         }
 
         public void Setup()

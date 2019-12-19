@@ -91,7 +91,8 @@
     <Compile Include="Source\Scene\MainScene.cs" />
     <Compile Include="Source\Scene\SceneManager.cs" />
     <Compile Include="Source\TickManager.cs" />
-    <Compile Include="Source\Utilities\ObjectExtensions.cs" />
+    <Compile Include="Source\Utilities\DictionaryExtensions.cs" />
+    <Compile Include="Source\Utilities\StandardExtensions.cs" />
     <Compile Include="Source\Utilities\VectorUtils.cs" />
   </ItemGroup>
   <ItemGroup>

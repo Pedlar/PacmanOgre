@@ -27,13 +27,6 @@ namespace PacmanOgre.Components
             _entity = entity;
         }
 
-        public CameraComponent(IContext context, IEntity entity, bool active)
-        {
-            _context = context;
-            _entity = entity;
-            ActiveCamera = active;
-        }
-
         public void Setup()
         {
 

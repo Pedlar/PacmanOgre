@@ -10,6 +10,7 @@ using org.ogre;
 
 using OgreSceneManager = org.ogre.SceneManager;
 using OgreEntity = org.ogre.Entity;
+using SharpEngine.Component;
 
 namespace PacmanOgre.Scene
 {
@@ -36,17 +37,30 @@ namespace PacmanOgre.Scene
             
             var entity = _entityManager.CreateEntity(configure: e =>
             {
-                e.AddComponent<PositionComponent>(_context, e, new Vector3(0f, 0f, 0f));
+                e.AddComponent<PositionComponent>(new ComponentProperties()
+                {
+                    ["Position"] = new Vector3(10f, 10f, 0f)
+                }, _context, e);
                 e.AddComponent<VelocityComponent>(_context, e);
-                e.AddComponent<MeshComponent>(_context, e, "Sinbad.mesh");
+                e.AddComponent<MeshComponent>(new ComponentProperties()
+                {
+                    ["MeshName"] = "Sinbad.mesh"
+                }, _context, e);
                 e.AddComponent<PlayerInputComponent>(_context, e);
                 e.AddComponent<RenderableComponent>(_context, e);
             });
 
             var cameraEntity = _entityManager.CreateEntity(configure: e =>
             {
-                e.AddComponent<PositionComponent>(_context, e, new Vector3(0f, 0f, 50f));
-                e.AddComponent<CameraComponent>(_context, e, true);
+                e.AddComponent<PositionComponent>(new ComponentProperties()
+                {
+                    ["Position"] = new Vector3(0f, 0f, 50f)
+                }, _context, e);
+
+                e.AddComponent<CameraComponent>(new ComponentProperties()
+                {
+                    ["ActiveCamera"] = true
+                }, _context, e);
             });
 
         }

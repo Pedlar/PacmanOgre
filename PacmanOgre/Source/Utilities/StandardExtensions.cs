@@ -20,5 +20,15 @@ namespace PacmanOgre.Utilities
             block(self);
             return self;
         }
+
+        public static T TakeIf<T>(this T self, Func<T, bool> predicate)
+        {
+            if(predicate(self))
+            {
+                return self;
+            }
+
+            return default(T);
+        }
     }
 }

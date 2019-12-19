@@ -37,9 +37,9 @@ namespace PacmanOgre.Components
             }
         }
 
-        public PositionComponent(IContext context, IEntity entity, Vector3 vector3)
+        public PositionComponent(IContext context, IEntity entity)
         {
-            Position = vector3;
+
         }
 
         protected virtual void OnPositionChangedEvent(Vector3 vector3)
