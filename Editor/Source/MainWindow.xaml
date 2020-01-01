@@ -1,0 +1,53 @@
+﻿<Window x:Class="SharpEngine.Editor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SharpEngine.Editor"
+        xmlns:view="clr-namespace:SharpEngine.Editor.View"
+        xmlns:viewmodel="clr-namespace:SharpEngine.Editor.ViewModel"
+        xmlns:dock="http://schemas.xceed.com/wpf/xaml/avalondock"
+        xmlns:dockctrl="clr-namespace:Xceed.Wpf.AvalonDock.Controls;assembly=Xceed.Wpf.AvalonDock"
+        mc:Ignorable="d"
+        Loaded="Window1_OnLoaded" Closing="Window1_OnClosing"
+        Title="MainWindow" Height="600" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0" DataContext="{Binding MenuViewModel}" ItemsSource="{Binding Items}">
+            <Menu.Resources>
+                <Style TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
+                    <Setter Property="Command" Value="{Binding Command}" />
+                    <Setter Property="Header" Value="{Binding Header}" />
+                    <Setter Property="IsCheckable" Value="{Binding IsCheckable}" />
+                    <Setter Property="IsChecked" Value="{Binding IsChecked}" />
+                </Style>
+                <HierarchicalDataTemplate DataType="{x:Type viewmodel:MenuItemViewModel}" ItemsSource="{Binding Items}" />
+            </Menu.Resources>
+        </Menu>
+
+        <dock:DockingManager x:Name="dock" Grid.Row="1"
+            DataContext="{Binding DockManagerViewModel}"
+            DocumentsSource="{Binding Documents}"
+            AnchorablesSource="{Binding Anchorables}" >
+
+            <dock:DockingManager.Resources>
+                <DataTemplate DataType="{x:Type viewmodel:EditorViewportViewModel}">
+                    <view:EditorViewportView/>
+                </DataTemplate>
+            </dock:DockingManager.Resources>
+
+            <dock:DockingManager.LayoutItemContainerStyle>
+                <!-- you can add additional bindings from the layoutitem to the DockWindowViewModel -->
+                <Style TargetType="{x:Type dockctrl:LayoutItem}" >
+                    <Setter Property="Title" Value="{Binding Model.Title}" />
+                    <Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}" />
+                    <Setter Property="CanClose" Value="{Binding Model.CanClose}" />
+                </Style>
+            </dock:DockingManager.LayoutItemContainerStyle>
+        </dock:DockingManager>
+    </Grid>
+</Window>

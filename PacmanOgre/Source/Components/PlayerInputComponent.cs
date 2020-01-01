@@ -1,11 +1,5 @@
 ﻿using PacmanOgre.Input;
-using PacmanOgre.Utilities;
 using SharpEngine;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PacmanOgre.Components
 {
@@ -59,10 +53,10 @@ namespace PacmanOgre.Components
                     _velocityComponent.Velocity.Increment(new org.ogre.Vector3(SPEED, 0f, 0f));
                     break;
                 case 'R': // Up
-                    _velocityComponent.Velocity.Increment(new org.ogre.Vector3(0f, SPEED, 0f));
+                    _velocityComponent.Velocity.Decrement(new org.ogre.Vector3(0f, 0f, SPEED));
                     break;
                 case 'Q': // Down
-                    _velocityComponent.Velocity.Decrement(new org.ogre.Vector3(0f, SPEED, 0f));
+                    _velocityComponent.Velocity.Increment(new org.ogre.Vector3(0f, 0f, SPEED));
                     break;
             }
         }
@@ -78,10 +72,10 @@ namespace PacmanOgre.Components
                     _velocityComponent.Velocity.Decrement(new org.ogre.Vector3(SPEED, 0f, 0f));
                     break;
                 case 'R': // Up
-                    _velocityComponent.Velocity.Decrement(new org.ogre.Vector3(0f, SPEED, 0f));
+                    _velocityComponent.Velocity.Increment(new org.ogre.Vector3(0f, 0f, SPEED));
                     break;
                 case 'Q': // Down
-                    _velocityComponent.Velocity.Increment(new org.ogre.Vector3(0f, SPEED, 0f));
+                    _velocityComponent.Velocity.Decrement(new org.ogre.Vector3(0f, 0f, SPEED));
                     break;
             }
         }

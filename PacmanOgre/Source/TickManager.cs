@@ -7,7 +7,7 @@ namespace PacmanOgre
     public class TickManager : ITickManager
     {
 
-        public TickManager(ApplicationContext applicationContext)
+        public TickManager()
         {
 
         }

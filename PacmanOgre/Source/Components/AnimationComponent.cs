@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using SharpEngine;
+﻿using SharpEngine;
 using org.ogre;
 
 namespace PacmanOgre.Components
@@ -13,7 +7,6 @@ namespace PacmanOgre.Components
     {
         public string AnimationState { get; set; }
 
-        private readonly IRenderer renderer;
         private readonly IEntity entity;
 
         private AnimationState ogreAnimationState;
@@ -21,7 +14,6 @@ namespace PacmanOgre.Components
         public AnimationComponent(IContext context, IEntity entity, string animationState)
         {
             this.entity = entity;
-            renderer = context.GetRenderer();
             AnimationState = animationState;
             context.GetITickManager().OnFrameStart += OnFrameStart;
         }

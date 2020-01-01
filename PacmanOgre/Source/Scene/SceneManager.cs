@@ -1,4 +1,5 @@
-﻿using SharpEngine;
+﻿using PacmanOgre.Scene.Loader;
+using SharpEngine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,15 +19,26 @@ namespace PacmanOgre.Scene
         public event EventHandler<EventArgs> OnSceneUnloaded;
 
         private IContext _context;
+        private ScenesLoader _scenesLoader;
 
         public SceneManager(IContext context)
         {
             _context = context;
+            _scenesLoader = new ScenesLoader(this);
         }
 
-        public void AddScene<T>() where T: IScene
+        public void Setup()
         {
-            Type sceneType = typeof(T);
+            _scenesLoader.LoadScenes();
+        }
+
+        public void AddScene<T>() where T : IScene
+        {
+            AddScene(typeof(T));
+        }
+
+        public void AddScene(Type sceneType)
+        {
             ConstructorInfo constructorInfo = sceneType.GetConstructor(new Type[] { typeof(IContext) });
             IScene scene;
             object[] constructorParams = new object[] { };

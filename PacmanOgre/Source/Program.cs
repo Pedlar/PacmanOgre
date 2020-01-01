@@ -1,14 +1,16 @@
-﻿using PacmanOgre;
+﻿using org.ogre;
+using PacmanOgre;
 
 public class Program
 {
     static void Main()
     {
-        var game = new PacmanGame();
-        game.initApp();
-        game.getRoot().startRendering();
-        game.closeApp();
+        var gameSDL = new GameSDL();
 
-        game.Dispose();
+        gameSDL.initApp();
+        gameSDL.getRoot().startRendering();
+        gameSDL.closeApp();
+
+        gameSDL.Dispose();
     }
 }

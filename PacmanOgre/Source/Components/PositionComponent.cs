@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using SharpEngine;
 using org.ogre;
 using PacmanOgre.Utilities;
+using Entity.Component;
 
 namespace PacmanOgre.Components
 {
@@ -20,6 +17,8 @@ namespace PacmanOgre.Components
         public event EventHandler<PositionChangedEventArgs> OnPositionChanged;
 
         private Vector3 _position;
+
+        [Description("Position")]
         public Vector3 Position
         {
             get

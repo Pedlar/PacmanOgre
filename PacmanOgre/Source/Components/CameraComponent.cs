@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using SharpEngine;
+﻿using SharpEngine;
 using org.ogre;
 using OgreEntity = org.ogre.Entity;
+using Entity.Component;
 
 namespace PacmanOgre.Components
 {
@@ -15,6 +10,7 @@ namespace PacmanOgre.Components
         private readonly IContext _context;
         private readonly IEntity _entity;
 
+        [Description("Is Active Camera")]
         public bool ActiveCamera { get; set; }
 
         private Camera _camera;
@@ -40,12 +36,16 @@ namespace PacmanOgre.Components
         private void setupCamera(Camera camera)
         {
             PositionComponent transformComponent = _entity.GetComponent<PositionComponent>();
-            float z = transformComponent.Position.z;
+            //float z = transformComponent.Position.z;
+            float z = 9f;
 
-            Matrix4 p = this.BuildScaledOrthoMatrix(z / -2.0f,
-                                                    z / 2.0f,
-                                                    z / -2.0f,
-                                                    z / 2.0f, 0, 1000);
+            float w = _context.GetRenderWindow().getWidth();
+            float h = _context.GetRenderWindow().getHeight();
+
+            Matrix4 p = this.BuildScaledOrthoMatrix(w / z / -2f,
+                                                    w / z / 2f,
+                                                    h / z / -2f,
+                                                    h / z / 2.0f, 0, 1000);
 
             camera.setAutoAspectRatio(true);
             camera.setNearClipDistance(5);

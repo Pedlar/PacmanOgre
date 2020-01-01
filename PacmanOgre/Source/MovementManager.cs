@@ -1,14 +1,11 @@
 ﻿using org.ogre;
 using PacmanOgre.Components;
 using SharpEngine;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PacmanOgre
 {
+    using static PacmanOgre.Utilities.EnumerableExtensions;
+
     class MovementManager : IMovementManager
     {
         private readonly EntityManager _entityManager;

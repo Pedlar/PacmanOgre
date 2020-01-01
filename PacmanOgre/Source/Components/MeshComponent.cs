@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿using Entity.Component;
 using SharpEngine;
 
 namespace PacmanOgre.Components
@@ -9,6 +8,7 @@ namespace PacmanOgre.Components
         private readonly IContext context;
         private readonly IEntity entity;
 
+        [Description("Mesh Name")]
         public string MeshName { get; set; }
 
         public MeshComponent(IContext context, IEntity entity)

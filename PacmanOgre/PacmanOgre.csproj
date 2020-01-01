@@ -33,7 +33,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -42,13 +42,13 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject />
+    <StartupObject>Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ogre3DCSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -75,23 +75,26 @@
     <Compile Include="Source\Components\PlayerInputComponent.cs" />
     <Compile Include="Source\Components\RenderableComponent.cs" />
     <Compile Include="Source\Components\PositionComponent.cs" />
+    <Compile Include="Source\Components\ScaleComponent.cs" />
     <Compile Include="Source\Components\VelocityComponent.cs" />
+    <Compile Include="Source\GameSDL.cs" />
     <Compile Include="Source\IContext.cs" />
     <Compile Include="Source\IMovementManager.cs" />
     <Compile Include="Source\Input\InputManager.cs" />
-    <Compile Include="Source\IRenderer.cs" />
     <Compile Include="Source\MovementManager.cs" />
-    <Compile Include="Source\Render\Renderer.cs" />
-    <Compile Include="Source\PacmanGame.cs" />
+    <Compile Include="Source\Game.cs" />
     <Compile Include="Source\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\ITickManager.cs" />
     <Compile Include="Source\Scene\IScene.cs" />
     <Compile Include="Source\Scene\ISceneManager.cs" />
+    <Compile Include="Source\Scene\Loader\SceneLoader.cs" />
+    <Compile Include="Source\Scene\Loader\ScenesLoader.cs" />
     <Compile Include="Source\Scene\MainScene.cs" />
     <Compile Include="Source\Scene\SceneManager.cs" />
     <Compile Include="Source\TickManager.cs" />
     <Compile Include="Source\Utilities\DictionaryExtensions.cs" />
+    <Compile Include="Source\Utilities\EnumerableExtensions.cs" />
     <Compile Include="Source\Utilities\StandardExtensions.cs" />
     <Compile Include="Source\Utilities\VectorUtils.cs" />
   </ItemGroup>
@@ -103,9 +106,9 @@
     <Folder Include="Resources\Media\materials\programs\" />
     <Folder Include="Resources\Media\materials\scripts\" />
     <Folder Include="Resources\Media\materials\textures\nvidia\" />
-    <Folder Include="Resources\Media\models\" />
     <Folder Include="Resources\Media\particle\" />
     <Folder Include="Resources\Media\volumeTerrain\" />
+    <Folder Include="Source\Scene\Loader\TagParsers\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.1">
@@ -120,6 +123,16 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Media\materials\textures\Color_008.material" />
+    <None Include="Resources\Media\materials\textures\Color_009.material" />
+    <None Include="Resources\Media\materials\textures\Color_A03.material" />
+    <None Include="Resources\Media\materials\textures\Color_D01.material" />
+    <None Include="Resources\Media\materials\textures\Color_I01.material" />
+    <None Include="Resources\Media\materials\textures\edge_color000255.material" />
+    <None Include="Resources\Media\materials\textures\material.material" />
+    <None Include="Resources\Media\materials\textures\material_0.material" />
+    <None Include="Resources\Media\models\pacman.mesh" />
+    <None Include="Resources\Media\models\the_maze.mesh" />
     <None Include="Resources\Media\packs\Sinbad.zip" />
     <None Include="Resources\plugins.cfg" />
     <None Include="Resources\resources.cfg" />
@@ -132,7 +145,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Dependencies\Ogre3DCSharp.dll" />
+    <Content Include="Resources\Media\scenes\MainScene.xml" />
+    <Content Include="Resources\Media\models\pacman.mesh.xml" />
+    <Content Include="Resources\Media\models\the_maze.mesh.xml" />
     <Content Include="Resources\Media\resource_holder.txt" />
+    <Content Include="Resources\Media\scenes\Scenes.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Entity\Entity.csproj">

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using org.ogre;
 using OgreEntity = org.ogre.Entity;
 using SharpEngine;
@@ -52,7 +48,10 @@ namespace PacmanOgre.Components
 
         public void OnActivated(object source, EntityEventArgs eventArgs)
         {
-            SceneNode.attachObject(OgreEntity);
+            if (!OgreEntity.isAttached())
+            {
+                SceneNode.attachObject(OgreEntity);
+            }
         }
 
         public void OnDestroy(object source, EntityEventArgs eventArgs)

@@ -10,6 +10,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PacmanOgre", "PacmanOgre\Pa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entity", "..\Entity\Entity.csproj", "{FE5839D7-BF87-4CDC-88D9-B9A857F03B89}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Editor", "Editor\Editor.csproj", "{38971DCB-2130-4792-B4A5-6B6EC28253DC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A448B88B-7FCC-4D5F-9750-35F99F02033D} = {A448B88B-7FCC-4D5F-9750-35F99F02033D}
+		{FE5839D7-BF87-4CDC-88D9-B9A857F03B89} = {FE5839D7-BF87-4CDC-88D9-B9A857F03B89}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +30,10 @@ Global
 		{FE5839D7-BF87-4CDC-88D9-B9A857F03B89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE5839D7-BF87-4CDC-88D9-B9A857F03B89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE5839D7-BF87-4CDC-88D9-B9A857F03B89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38971DCB-2130-4792-B4A5-6B6EC28253DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38971DCB-2130-4792-B4A5-6B6EC28253DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38971DCB-2130-4792-B4A5-6B6EC28253DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38971DCB-2130-4792-B4A5-6B6EC28253DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

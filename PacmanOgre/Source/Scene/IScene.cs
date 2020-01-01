@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharpEngine;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,6 +32,9 @@ namespace PacmanOgre.Scene
     public interface IScene : IDisposable
     {
         SceneId SceneId { get; set; }
+
+        EntityManager GetEntityManager();
+        org.ogre.SceneManager GetOgreSceneManager();
 
         void Setup();
         void LoadScene();
