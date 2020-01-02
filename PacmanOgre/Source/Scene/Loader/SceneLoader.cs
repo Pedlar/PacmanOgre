@@ -15,6 +15,7 @@ namespace PacmanOgre.Scene.Loader
 
     public class SceneLoader
     {
+        public string FilePath { get; set; }
         private IContext _context;
         private EntityManager _entityManager;
 
@@ -27,7 +28,7 @@ namespace PacmanOgre.Scene.Loader
         public void LoadScene(string sceneName)
         {
             XmlDocument sceneXml = new XmlDocument();
-            sceneXml.Load($"Media/{sceneName}.xml");
+            sceneXml.Load(FilePath);
 
             XmlNode scene = sceneXml.DocumentElement;
 

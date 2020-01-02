@@ -37,7 +37,7 @@ namespace PacmanOgre.Scene
 
             _sceneManager.setAmbientLight(new ColourValue(.9f, .9f, .9f));
 
-            _sceneLoader = new SceneLoader(context, entityManager);
+            _sceneLoader = new SceneLoader(context, entityManager) { FilePath = "Media/scenes/MainScene.xml" };
         }
 
         public SceneId SceneId { get; set; } = MainSceneId;

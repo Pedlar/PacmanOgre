@@ -2,7 +2,7 @@
 <scenes>
   <scene Name="MainScene">
     <File>
-      MainScene.xml
+      scenes/MainScene.xml
     </File>
   </scene>
 </scenes>
