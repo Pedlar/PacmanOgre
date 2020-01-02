@@ -10,6 +10,9 @@ namespace SharpEngine.Editor.ViewModel
 {
     public class EditorViewportViewModel : DockWindowViewModel
     {
+
+        public string Text { get; set; } = "Test";
+
         private EditorViewportView _view;
         public EditorViewportView View { get { return _view; }
             set
@@ -24,7 +27,7 @@ namespace SharpEngine.Editor.ViewModel
             
         }
 
-        private void ReadyToInitOgre(object sender, WindowEventArgs args)
+        public void ReadyToInitOgre(object sender, WindowEventArgs args)
         {
             GameWPF.Singleton.ExternalWindowHandle = args.WinPtr;
 

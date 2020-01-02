@@ -16,6 +16,7 @@ namespace PacmanOgre.Scene
         event EventHandler<EventArgs> OnSceneUnloaded;
 
         void Setup();
+        bool HasIScene(Type type);
         void AddScene<T>() where T : IScene;
         void AddScene(Type type);
         void DisplayScene(SceneId sceneId);

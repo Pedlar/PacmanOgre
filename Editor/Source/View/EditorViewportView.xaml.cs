@@ -32,15 +32,16 @@ namespace SharpEngine.Editor.View
         {
             InitializeComponent();
             EditorViewportView view = this;
-            PART_OgreImage.WindowReadyEvent += (s, e) =>
-            {
-                HWNDInitialised(this, e);
-            };
         }
 
         private void UserControl_Initialized(object sender, EventArgs e)
         {
 
+        }
+
+        private void WinReadyEvent(object sender, WindowEventArgs args)
+        {
+            
         }
     }
 }

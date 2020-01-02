@@ -99,6 +99,13 @@ namespace SharpEngine.Editor.Widget
 
                 WindowReadyEvent?.Invoke(this, new WindowEventArgs { WinPtr = hWnd });
 
+                GameWPF.Singleton.ExternalWindowHandle = hWnd;
+
+                if (GameWPF.Singleton.getRoot() == null)
+                {
+                    GameWPF.Singleton.initApp();
+                }
+
                 _root = GameWPF.Singleton.getRoot();
 
                 if(_root == null)

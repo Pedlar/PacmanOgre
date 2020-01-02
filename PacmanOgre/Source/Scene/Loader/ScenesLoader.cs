@@ -8,6 +8,8 @@ using System.Xml.Serialization;
 
 namespace PacmanOgre.Scene.Loader
 {
+    using static PacmanOgre.Utilities.EnumerableExtensions;
+
     public class ScenesLoader
     {
         public class SceneNode
@@ -16,6 +18,19 @@ namespace PacmanOgre.Scene.Loader
             public string Name { get; set; }
             [XmlElement]
             public string File { get; set; }
+
+            private Type _type;
+            public Type Type
+            {
+                get
+                {
+                    if(_type == null)
+                    {
+                        _type = Type.GetType($"PacmanOgre.Scene.{Name}"); ;
+                    }
+                    return _type;
+                }
+            }
         }
 
         [XmlRoot("scenes")]
@@ -53,18 +68,19 @@ namespace PacmanOgre.Scene.Loader
         {
             SceneList sceneList = SceneList.Load(FilePath);
 
-            sceneList.scenes.ForEach(sceneNode =>
-            {
-                try
+            sceneList.scenes
+                .Where((node) => { return !SceneManager.HasIScene(node.Type); })
+                .ForEach(sceneNode =>
                 {
-                    // TODO: Pass in Namespace so this can be created from the editor adding a new scene.
-                    Type classType = Type.GetType($"PacmanOgre.Scene.{sceneNode.Name}");
-                    SceneManager.AddScene(classType);
-                } catch(Exception e)
-                {
-                    throw new Exception($"Error loading Scene {sceneNode.Name}", e);
-                }
-            });
+                    try
+                    {
+                        // TODO: Pass in Namespace so this can be created from the editor adding a new scene.
+                        SceneManager.AddScene(sceneNode.Type);
+                    } catch(Exception e)
+                    {
+                        throw new Exception($"Error loading Scene {sceneNode.Name}", e);
+                    }
+                });
         }
     }
 }

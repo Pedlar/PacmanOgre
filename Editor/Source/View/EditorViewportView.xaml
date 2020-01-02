@@ -1,4 +1,4 @@
-﻿<UserControl x:Name="_editorViewportModel"
+﻿<UserControl
              x:Class="SharpEngine.Editor.View.EditorViewportView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -12,7 +12,7 @@
     <Grid>
         <Image x:Name="PART_RenderTargetControl" AllowDrop="True" Stretch="Fill">
             <Image.Source>
-                <Widget:OgreImage x:Name="PART_OgreImage" AutoInitialise="True" ViewportSize="1080, 1920" />
+                <Widget:OgreImage x:Name="PART_OgreImage" AutoInitialise="True" ViewportSize="1080, 1920" WindowReadyEvent="WinReadyEvent"/>
             </Image.Source>
         </Image>
     </Grid>

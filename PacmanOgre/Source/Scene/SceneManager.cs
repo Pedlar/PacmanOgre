@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace PacmanOgre.Scene
 {
+    using static PacmanOgre.Utilities.EnumerableExtensions;
+
     public class SceneManager : ISceneManager
     {
         public IDictionary<SceneId, IScene> Scenes { get; private set; } = new Dictionary<SceneId, IScene>();
@@ -67,6 +69,19 @@ namespace PacmanOgre.Scene
             scene.Setup();
 
             Scenes.Add(scene.SceneId, scene);
+        }
+
+        public bool HasIScene(Type type)
+        {
+            foreach(var scene in Scenes.Values)
+            {
+                if (scene.GetType() == type)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public void DisplayScene(SceneId sceneId)
